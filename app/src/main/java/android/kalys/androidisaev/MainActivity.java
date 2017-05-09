@@ -32,35 +32,39 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-        testHandling.fillTestData();
+        testHandling.fillTestData(); // тест заполнения данными
 
+        /** GradientDrawable - служит для создания линий в таблице*/
         GradientDrawable border = new GradientDrawable();
         border.setColor(0xFFFFFFFF);
         border.setStroke(1, 0xFF000000);
 
-        TextView nameOfStudent = (TextView) findViewById(R.id.nameStudent);
-        TextView nameOfGroup = (TextView) findViewById(R.id.groupStudent);
+        /** Компоненты интерфейса*/
+        TextView nameOfStudent = (TextView) findViewById(R.id.nameStudent); //имя студента
+        TextView nameOfGroup = (TextView) findViewById(R.id.groupStudent); //назавние группы
+        TextView gpaValue = (TextView) findViewById(R.id.valueGPA); //общая оценка
 
+        /** Вставляем текст в компонент TextView (имя, группа), которые берутся из коллекции или БД */
         nameOfStudent.setText(testHandling.getStudents().get(0).getName());
         nameOfGroup.setText(testHandling.getStudents().get(0).getGroup());
 
-        TableRow.LayoutParams  tl = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
-
+        /** Создание таблицы. Так как заранее неизвестно количество предметов, необходимо создать компонеты интрефейса
+         * программно. (строки 52-89 - создание таблицы с данными)*/
         TableLayout tableLayout = (TableLayout) findViewById(R.id.table);
         int i = 0;
         for(Subject subject : testHandling.getStudents().get(0).getSubjects()){
 
             TextView numberOfSub = new TextView(this);
-            tl.setMargins(5,5,5,5);
-            numberOfSub.setLayoutParams(tl);
+            numberOfSub.setPadding(5,5,5,5);
+            numberOfSub.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 2f));
 
             TextView nameOfSub = new TextView(this);
-            tl.weight = 10;
-            nameOfSub.setLayoutParams(tl);
+            nameOfSub.setPadding(5,5,5,5);
+            nameOfSub.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 5f));
 
             TextView evalOfSub = new TextView(this);
-            tl.weight = 0;
-            evalOfSub.setLayoutParams(tl);
+            evalOfSub.setPadding(5,5,5,5);
+            evalOfSub.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 2f));
 
             numberOfSub.setTextSize(18);
             nameOfSub.setTextSize(18);
@@ -83,48 +87,15 @@ public class MainActivity extends AppCompatActivity {
             tableLayout.addView(row);
             i++;
         }
-        TextView gpaText = new TextView(this);
-        gpaText.setLayoutParams(tl);
-        TextView gpaView = new TextView(this);
-        gpaView.setLayoutParams(tl);
 
-        gpaText.setTextSize(18);
-        gpaView.setTextSize(18);
+        gpaValue.setText(testHandling.getStudents().get(0).getGpa()); // вставляем общую оценку
 
-        gpaText.setText("Общая оценка");
-        gpaView.setText(testHandling.getStudents().get(0).getGpa());
 
-        TableRow row = new TableRow(this);
-        TableLayout.LayoutParams tableLP = new TableLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT);
-        tableLP.setMargins(5,100,5,0);
-        row.setLayoutParams(tableLP);
 
-        row.addView(gpaView);
 
-        tableLayout.addView(row);
+
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
 
 }

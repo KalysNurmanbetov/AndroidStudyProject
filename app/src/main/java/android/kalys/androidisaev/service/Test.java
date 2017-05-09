@@ -12,6 +12,6 @@ public class Test {
 
         testHandling.fillTestData();
 
-        testHandling.pringTestData();
+        testHandling.printTestData();
     }
 }

@@ -41,7 +41,7 @@ public class TestHandling implements ListOfStudents{
         students.remove(student);
     }
 
-    public void pringTestData(){
+    public void printTestData(){
         for (Student student: students){
             System.out.println(student);
             for(Subject subject: student.getSubjects()){
