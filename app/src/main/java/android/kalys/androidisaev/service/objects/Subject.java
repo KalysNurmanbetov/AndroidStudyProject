@@ -1,8 +1,5 @@
 package android.kalys.androidisaev.service.objects;
 
-/**
- * Created by kalys on 19.04.17.
- */
 
 public class Subject {
     private String name;

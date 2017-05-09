@@ -4,18 +4,15 @@ package android.kalys.androidisaev.service.objects;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by kalys on 19.04.17.
- */
 
 public class Student {
     private String name;
-    private String group;
+    private Group group;
     private String gpa;
 
     private List <Subject> subjects = new ArrayList<>();
 
-    public Student(String name, String group){
+    public Student(String name, Group group){
         this.name = name;
         this.group = group;
 
@@ -28,11 +25,11 @@ public class Student {
         this.name = name;
     }
 
-    public String getGroup() {
+    public Group getGroup() {
         return group;
     }
 
-    public void setGroup(String group) {
+    public void setGroup(Group group) {
         this.group = group;
     }
 
@@ -52,6 +49,7 @@ public class Student {
         this.subjects = subjects;
     }
 
+    // рассчет среднего балла
     public void countGPA(){
         double valueOfgpa = 0;
         String gpa;
@@ -61,14 +59,15 @@ public class Student {
         }
 
         valueOfgpa = valueOfgpa / subjects.size();
-        gpa = String.valueOf(valueOfgpa);
+
+        gpa = String.format("%.2f", valueOfgpa);
 
         this.gpa = gpa;
     }
 
     @Override
     public String toString(){
-        return "Имя: " + name + ". Группа: " + group;
+        return "Имя: " + name + ". Группа: " + group.getName();
     }
 
 

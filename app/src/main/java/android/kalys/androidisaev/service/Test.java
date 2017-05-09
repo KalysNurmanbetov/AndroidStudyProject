@@ -1,6 +1,6 @@
 package android.kalys.androidisaev.service;
 
-import android.kalys.androidisaev.service.handling.TestHandling;
+import android.kalys.androidisaev.service.handling.StudentsList;
 
 /**
  * Created by kalys on 19.04.17.
@@ -8,10 +8,10 @@ import android.kalys.androidisaev.service.handling.TestHandling;
 
 public class Test {
     public static void main(String[] args) {
-        TestHandling testHandling = new TestHandling();
+        StudentsList studentsList = new StudentsList();
 
-        testHandling.fillTestData();
+        studentsList.fillTestData();
 
-        testHandling.printTestData();
+        studentsList.printTestData();
     }
 }

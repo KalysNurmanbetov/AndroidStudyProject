@@ -1,30 +1,19 @@
 package android.kalys.androidisaev;
 
 import android.graphics.drawable.GradientDrawable;
-import android.kalys.androidisaev.service.handling.TestHandling;
+import android.kalys.androidisaev.service.handling.StudentsList;
 import android.kalys.androidisaev.service.objects.Subject;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 public class MainActivity extends AppCompatActivity {
 
-    private TestHandling testHandling = new TestHandling();
+    private StudentsList studentsList = new StudentsList();
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
@@ -32,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-        testHandling.fillTestData(); // тест заполнения данными
+        studentsList.fillTestData(); // тест заполнения данными
 
         /** GradientDrawable - служит для создания линий в таблице*/
         GradientDrawable border = new GradientDrawable();
@@ -45,14 +34,14 @@ public class MainActivity extends AppCompatActivity {
         TextView gpaValue = (TextView) findViewById(R.id.valueGPA); //общая оценка
 
         /** Вставляем текст в компонент TextView (имя, группа), которые берутся из коллекции или БД */
-        nameOfStudent.setText(testHandling.getStudents().get(0).getName());
-        nameOfGroup.setText(testHandling.getStudents().get(0).getGroup());
+        nameOfStudent.setText(studentsList.getStudents().get(0).getName());
+        nameOfGroup.setText(studentsList.getStudents().get(0).getGroup().getName());
 
         /** Создание таблицы. Так как заранее неизвестно количество предметов, необходимо создать компонеты интрефейса
          * программно. (строки 52-89 - создание таблицы с данными)*/
         TableLayout tableLayout = (TableLayout) findViewById(R.id.table);
         int i = 0;
-        for(Subject subject : testHandling.getStudents().get(0).getSubjects()){
+        for(Subject subject : studentsList.getStudents().get(0).getSubjects()){
 
             TextView numberOfSub = new TextView(this);
             numberOfSub.setPadding(5,5,5,5);
@@ -88,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
             i++;
         }
 
-        gpaValue.setText(testHandling.getStudents().get(0).getGpa()); // вставляем общую оценку
+        gpaValue.setText(studentsList.getStudents().get(0).getGpa()); // вставляем общую оценку
 
 
 
