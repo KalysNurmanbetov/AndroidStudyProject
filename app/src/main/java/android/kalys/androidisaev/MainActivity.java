@@ -1,19 +1,16 @@
 package android.kalys.androidisaev;
 
 import android.graphics.drawable.GradientDrawable;
-import android.kalys.androidisaev.service.handling.StudentsList;
-import android.kalys.androidisaev.service.objects.Subject;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private StudentsList studentsList = new StudentsList();
+
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
@@ -21,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-        studentsList.fillTestData(); // тест заполнения данными
+
 
         /** GradientDrawable - служит для создания линий в таблице*/
         GradientDrawable border = new GradientDrawable();
@@ -34,14 +31,14 @@ public class MainActivity extends AppCompatActivity {
         TextView gpaValue = (TextView) findViewById(R.id.valueGPA); //общая оценка
 
         /** Вставляем текст в компонент TextView (имя, группа), которые берутся из коллекции или БД */
-        nameOfStudent.setText(studentsList.getStudents().get(0).getName());
-        nameOfGroup.setText(studentsList.getStudents().get(0).getGroup().getName());
+        //nameOfStudent.setText(studentsList.getStudents().get(0).getName());
+        //nameOfGroup.setText(studentsList.getStudents().get(0).getGroup().getName());
 
         /** Создание таблицы. Так как заранее неизвестно количество предметов, необходимо создать компонеты интрефейса
          * программно. (строки 52-89 - создание таблицы с данными)*/
         TableLayout tableLayout = (TableLayout) findViewById(R.id.table);
         int i = 0;
-        for(Subject subject : studentsList.getStudents().get(0).getSubjects()){
+        /*for(Subject subject : studentsList.getStudents().get(0).getSubjects()){
 
             TextView numberOfSub = new TextView(this);
             numberOfSub.setPadding(5,5,5,5);
@@ -79,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
 
         gpaValue.setText(studentsList.getStudents().get(0).getGpa()); // вставляем общую оценку
 
-
+           */
 
 
 
