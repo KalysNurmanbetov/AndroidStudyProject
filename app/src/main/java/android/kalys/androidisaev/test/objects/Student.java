@@ -51,14 +51,14 @@ public class Student {
         boolean trulyMark = true;
 
         for(Map.Entry<Subject, String> entry : subjectsMarks.entrySet()){
-            if(entry.getValue() == null && trulyMark == true){
+            if(entry.getValue() == null && trulyMark){
                 System.out.println("Средняя оценка может быть неправильной так как студент не получил все оценки.");
                 trulyMark = false;
             }
             try {
                 valueOfgpa = valueOfgpa + Double.parseDouble(entry.getValue());
             }catch (NullPointerException ex){
-                ex.printStackTrace();
+                //
             }
 
         }
