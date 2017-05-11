@@ -1,11 +1,12 @@
 package android.kalys.androidisaev.test.objects;
 
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
 
-public class Student {
+public class Student implements Serializable{
     private String name;
     private Group group;
     private Map <Subject, String> subjectsMarks;

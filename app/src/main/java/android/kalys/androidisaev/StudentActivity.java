@@ -1,22 +1,32 @@
 package android.kalys.androidisaev;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
+import android.kalys.androidisaev.test.objects.Student;
+import android.kalys.androidisaev.test.objects.Subject;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.Map;
+
+public class StudentActivity extends AppCompatActivity {
 
 
+    @SuppressLint("NewApi")
 
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+        setContentView(R.layout.activity_student);
+
+        Intent intent = getIntent();
+        Student student = (Student) intent.getSerializableExtra("student");
 
 
 
@@ -31,14 +41,14 @@ public class MainActivity extends AppCompatActivity {
         TextView gpaValue = (TextView) findViewById(R.id.valueGPA); //общая оценка
 
         /** Вставляем текст в компонент TextView (имя, группа), которые берутся из коллекции или БД */
-        //nameOfStudent.setText(studentsList.getStudents().get(0).getName());
-        //nameOfGroup.setText(studentsList.getStudents().get(0).getGroup().getName());
+        nameOfStudent.setText(student.getName());
+        nameOfGroup.setText(student.getGroup().getName());
 
         /** Создание таблицы. Так как заранее неизвестно количество предметов, необходимо создать компонеты интрефейса
          * программно. (строки 52-89 - создание таблицы с данными)*/
         TableLayout tableLayout = (TableLayout) findViewById(R.id.table);
         int i = 0;
-        /*for(Subject subject : studentsList.getStudents().get(0).getSubjects()){
+        for(Map.Entry<Subject, String> entry : student.getSubjectsMarks().entrySet() ){
 
             TextView numberOfSub = new TextView(this);
             numberOfSub.setPadding(5,5,5,5);
@@ -61,8 +71,8 @@ public class MainActivity extends AppCompatActivity {
             evalOfSub.setBackground(border);
 
             numberOfSub.setText(String.valueOf(i+1));
-            nameOfSub.setText(subject.getName());
-            evalOfSub.setText(subject.getEvaluation());
+            nameOfSub.setText(entry.getKey().getName());
+            evalOfSub.setText(entry.getValue());
 
             TableRow row = new TableRow(this);
 
@@ -74,9 +84,9 @@ public class MainActivity extends AppCompatActivity {
             i++;
         }
 
-        gpaValue.setText(studentsList.getStudents().get(0).getGpa()); // вставляем общую оценку
+        gpaValue.setText(student.countGPA()); // вставляем общую оценку
 
-           */
+
 
 
 
