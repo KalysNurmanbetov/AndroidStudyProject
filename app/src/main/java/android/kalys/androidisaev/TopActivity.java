@@ -11,9 +11,13 @@ import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONObject;
 
@@ -26,7 +30,7 @@ public class TopActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_top);
+        setContentView(R.layout.top_activity);
 
         /** GradientDrawable - служит для создания линий в таблице*/
         GradientDrawable border = new GradientDrawable();
@@ -35,59 +39,27 @@ public class TopActivity extends AppCompatActivity {
 
         groupsCollection.fillTestData();
 
-        Group groupTest = groupsCollection.getGroupsCollection().get(1);
+        final Group groupTest = groupsCollection.getGroupsCollection().get(0);
 
         TextView groupName = (TextView) findViewById(R.id.groupName);
 
         groupName.setText(groupTest.getName());
 
-        TableLayout topTable = (TableLayout) findViewById(R.id.topStudenstTable);
-        int i = 0;
+        ListAdapter theAdapter = new MyAdapter(this, groupTest.getStudents());
 
+        ListView theListView = (ListView) findViewById(R.id.theListView);
 
-        for(final Student student : groupTest.getStudents()){
-            TextView numberOfStudent = new TextView(this);
-            numberOfStudent.setPadding(5,5,5,5);
-            numberOfStudent.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 2f));
+        theListView.setAdapter(theAdapter);
 
-            TextView nameOfStudent = new TextView(this);
-            nameOfStudent.setPadding(5,5,5,5);
-            nameOfStudent.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 5f));
+        theListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
 
-            TextView markGPAOfStudent = new TextView(this);
-            markGPAOfStudent.setPadding(5,5,5,5);
-            markGPAOfStudent.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 2f));
+                Intent intent = new Intent(view.getContext(), StudentActivity.class);
+                intent.putExtra("student", groupTest.getStudents().get(position));
+                startActivity(intent);
 
-            numberOfStudent.setTextSize(18);
-            nameOfStudent.setTextSize(18);
-            markGPAOfStudent.setTextSize(18);
-
-            numberOfStudent.setBackground(border);
-            nameOfStudent.setBackground(border);
-            markGPAOfStudent.setBackground(border);
-
-            numberOfStudent.setText(String.valueOf(i+1));
-            nameOfStudent.setText(student.getName());
-            markGPAOfStudent.setText(student.countGPA());
-
-            TableRow row = new TableRow(this);
-
-            row.addView(numberOfStudent);
-            row.addView(nameOfStudent);
-            row.addView(markGPAOfStudent);
-
-            row.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    Intent intent = new Intent(v.getContext(), StudentActivity.class);
-                    intent.putExtra("student", student);
-                    startActivity(intent);
-                }
-            });
-
-            topTable.addView(row);
-            i++;
-        }
+            }
+        });
     }
 }
