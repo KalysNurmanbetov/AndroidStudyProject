@@ -1,54 +1,52 @@
-package android.kalys.androidisaev.test.collections;
+package android.kalys.androidisaev;
 
+import android.content.Intent;
+import android.kalys.androidisaev.adapters.GroupsAdapter;
+import android.kalys.androidisaev.test.collections.GroupsCollection;
 import android.kalys.androidisaev.test.objects.Group;
 import android.kalys.androidisaev.test.objects.Student;
 import android.kalys.androidisaev.test.objects.Subject;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.List;
 
-/**
- * Created by kalys on 10.05.17.
- */
+public class GroupsActivity extends AppCompatActivity {
 
-public class GroupsCollection implements GroupsCollectionInterface {
-
-    private List <Group> groupsList;
-
-    public GroupsCollection(){
-        groupsList = new ArrayList<>();
-    }
+    ListView groupsList;
+    ArrayList<Group> groups = new ArrayList<>();
+    GroupsAdapter groupsAdapter;
 
     @Override
-    public void addGroup(Group group) {
-        groupsList.add(group);
-    }
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_groups);
 
-    @Override
-    public void updateGroup(Group group) {
+        fillTestData();
 
-    }
+        groupsAdapter = new GroupsAdapter(this, groups);
 
-    @Override
-    public void deleteGroup(Group group) {
-        groupsList.remove(group);
-    }
+        groupsList = (ListView) findViewById(R.id.groupsList);
+        groupsList.setAdapter(groupsAdapter);
 
-    @Override
-    public ArrayList<Group> getGroupsCollection() {
-        return (ArrayList<Group>) groupsList;
-    }
-
-    public void printGroups(){
-        for(Group group : groupsList){
-            System.out.println(group);
-        }
+        groupsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(view.getContext(), TopActivity.class);
+                intent.putExtra("group", groups.get(position));
+                startActivity(intent);
+            }
+        });
     }
 
     public void fillTestData(){
         // Создание групп
         Group ig_1_14 = new Group("IG-1-14");
         Group ig_2_14 = new Group("IG-2-14");
+        Group ig_2_16 = new Group("IG-2-16");
 
         // Создание студентов
         Student student1 = new Student("Baish Toktosunov", ig_1_14);
@@ -77,7 +75,8 @@ public class GroupsCollection implements GroupsCollectionInterface {
 
         // Создаем коллекцию групп
 
-        addGroup(ig_1_14);
-        addGroup(ig_2_14);
+        groups.add(ig_1_14);
+        groups.add(ig_2_14);
+        groups.add(ig_2_16);
     }
 }

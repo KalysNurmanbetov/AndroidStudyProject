@@ -26,16 +26,12 @@
         android:gravity="center"
         android:paddingBottom="5dp"
         android:paddingTop="5dp"
-        android:text="TextView"
+        android:text="@string/students"
         android:textSize="18sp" />
 
-    <TableLayout
-        android:id="@+id/topStudenstTable"
+    <ListView
+        android:id="@+id/listOfStudents"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp">
-
-    </TableLayout>
+        android:layout_height="match_parent" />
 
 </LinearLayout>

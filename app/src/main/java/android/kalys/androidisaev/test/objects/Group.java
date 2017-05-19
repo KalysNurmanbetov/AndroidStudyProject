@@ -7,8 +7,8 @@ import java.util.List;
 
 public class Group implements Serializable{
 
-    private String name;
-    private List<Student> students;
+    public String name;
+    private ArrayList<Student> students;
 
     public Group(){
 
@@ -29,11 +29,11 @@ public class Group implements Serializable{
         this.name = name;
     }
 
-    public List<Student> getStudents() {
+    public ArrayList<Student> getStudents() {
         return students;
     }
 
-    public void setStudents(List<Student> students) {
+    public void setStudents(ArrayList<Student> students) {
         this.students = students;
     }
 

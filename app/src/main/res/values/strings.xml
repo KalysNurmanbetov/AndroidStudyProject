@@ -2,4 +2,6 @@
     <string name="app_name">AndroidIsaev</string>
     <string name="action_settings">Settings</string>
     <string name="gpa">Общая оценка:</string>
+    <string name="groups">Группы</string>
+    <string name="students">Студенты</string>
 </resources>
