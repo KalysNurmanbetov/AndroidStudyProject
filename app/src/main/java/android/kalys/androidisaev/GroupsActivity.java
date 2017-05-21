@@ -2,7 +2,6 @@ package android.kalys.androidisaev;
 
 import android.content.Intent;
 import android.kalys.androidisaev.adapters.GroupsAdapter;
-import android.kalys.androidisaev.test.collections.GroupsCollection;
 import android.kalys.androidisaev.test.objects.Group;
 import android.kalys.androidisaev.test.objects.Student;
 import android.kalys.androidisaev.test.objects.Subject;
