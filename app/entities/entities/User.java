@@ -1,11 +1,8 @@
-package android.kalys.androidisaev.entities;
+package android.jyldyza.androidisaev.entities;
 
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- * Created by kalys on 26.05.17.
- */
 
 public class User {
     private String firsName;

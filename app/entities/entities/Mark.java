@@ -1,8 +1,6 @@
-package android.kalys.androidisaev.entities;
+package android.jyldyza.androidisaev.entities;
 
-/**
- * Created by kalys on 26.05.17.
- */
+
 
 public class Mark {
     private float markSubject;

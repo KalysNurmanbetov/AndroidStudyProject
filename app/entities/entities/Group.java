@@ -1,11 +1,8 @@
-package android.kalys.androidisaev.entities;
+package android.jyldyza.androidisaev.entities;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by kalys on 26.05.17.
- */
 
 public class Group {
     private String groupName;
